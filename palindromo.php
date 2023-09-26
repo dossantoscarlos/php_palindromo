@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 function verifica_palindromo($texto_processado, $texto_original) {
     $texto_original = explode(' ', trim($texto_original));
     $palavras = explode(' ', trim($texto_processado));
@@ -34,6 +34,5 @@ function execute() {
     }    
 }
 
-if (PHP_SAPI == 'cli') {
+if (PHP_SAPI == 'cli')
     execute();
-}
