@@ -1,37 +1,24 @@
 <?php
 
-function verifica_palindromo($texto_processado, $texto_original) {
-    $texto_original = explode(' ', trim($texto_original));
-    $palavras = explode(' ', trim($texto_processado));
-    foreach (array_combine($texto_original, $palavras) as $texto_original => $palavra)
-        echo message($palavra, $texto_original) . "\n";
+function verifica_palindromo($texto_processado) : void {
+    $processamento = str_replace(' ', '', $texto_processado);
+    $processamento = preg_replace('/[?.,;?+=$%#]/ui', '',$processamento);
+    echo message(strtolower($processamento));
 }
 
-function message($palavra, $texto_original) {
+function message($palavra) : string {
     if ($palavra == strrev($palavra))
-        return $texto_original . ' : é palíndromo';
-    return $texto_original . ' : não é palíndromo';
+        return 'é palíndromo';
+    return 'não é palíndromo';
 }
 
 function remove_unicode($texto) {
-    return ($processamento = iconv('UTF-8', 'ASCII//TRANSLIT', $texto));
-}
-
-function valida_exit() {
-    while (true) {
-        $option = strtolower(trim(readline('Deseja continuar? Digite S ou N: ')));
-        if ($option == 's' || $option == 'n') 
-            return $option == 'n';
-    }
+    return iconv('UTF-8', 'ASCII//TRANSLIT', $texto);
 }
 
 function execute() {
-    while (true) {
-        $texto_original = readline('Digite uma frase ou palavra/número: ');
-        verifica_palindromo(remove_unicode($texto_original), $texto_original);
-        if (valida_exit()) 
-            break; 
-    }    
+    $texto_original = readline('Digite uma frase ou palavra/número: ');
+    verifica_palindromo(remove_unicode($texto_original));
 }
 
 if (PHP_SAPI == 'cli') {
