@@ -21,6 +21,5 @@ function execute() {
     verifica_palindromo(remove_unicode($texto_original));
 }
 
-if (PHP_SAPI == 'cli') {
+if (PHP_SAPI == 'cli')
     execute();
-}
